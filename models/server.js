@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { dbConnection , dbConnectionTest} = require('../database/config');
 
 class Server {
 
@@ -15,12 +16,13 @@ class Server {
         this.paths = {
             //auth:       '/api/auth',
             //buscar:     '/api/buscar',
-            //categorias: '/api/categorias',
-            //productos:  '/api/productos',
             usuarios:     '/api/usuarios',
             //medidas:     'api/memdidas,'
             //uploads:    '/api/uploads',
         }
+
+        //Conectar a la base de datos
+        this.conectarBD();
 
         // Middlewares
         this.middlewares();
@@ -31,6 +33,17 @@ class Server {
 
     }
 
+    // Procedimiento para conectarse a la BD
+    async conectarBD() {
+        //bd en la nube
+        await dbConnection();
+
+        //bd en servidor local
+        //await dbConnectionTest();
+    }
+
+
+    // Proteccion de rutas y accesos al api desde la vista
     middlewares() {
 
         // CORS
@@ -44,6 +57,8 @@ class Server {
 
     }
 
+    // Declaracion de rutas del api
+
     routes() {
         
         // ruta del usuario
@@ -52,6 +67,7 @@ class Server {
 
     }
 
+    // Mostrar el puerto y aviso que el servidor esta levantado
     listen() {
        this.app.listen( this.port, () => {
             console.log('Servidor corriendo en puerto' , this.port );

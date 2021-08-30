@@ -67,6 +67,7 @@ const usuarioDelete = async (req, res = response) => {
 
     //capturar el id que manda el usuario o la vista
     const id = req.params.id;
+    const usuarioAutenticado = req.usuario; // id del usuario que esta haciendo la accion 
     
     //const usuario = await Usuario.findByIdAndDelete(id); //Borrar fisicamente
     const usuario = await Usuario.findByIdAndUpdate( id, {estado: false },{new: true}); // borrar logicamente
@@ -74,7 +75,8 @@ const usuarioDelete = async (req, res = response) => {
     res.json({
         ok: true,
         msg: 'Usuario borrado',
-        usuario
+        usuario,
+        usuarioAutenticado
     });
 }
 

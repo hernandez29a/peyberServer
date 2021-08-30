@@ -14,7 +14,7 @@ class Server {
         */
         
         this.paths = {
-            //auth:       '/api/auth',
+            auth:       '/api/auth',
             //buscar:     '/api/buscar',
             usuarios:     '/api/usuarios',
             //medidas:     'api/memdidas,'
@@ -61,8 +61,8 @@ class Server {
 
     routes() {
         
-        // ruta del usuario
-        this.app.use(this.paths.usuarios, require('../routes/usuarios.routes'));
+        this.app.use(this.paths.auth, require('../routes/auth.routes')); // ruta para logearse
+        this.app.use(this.paths.usuarios, require('../routes/usuarios.routes')); // ruta del usuario
 
 
     }

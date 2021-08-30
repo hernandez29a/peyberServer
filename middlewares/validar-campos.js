@@ -11,6 +11,7 @@ const validarCampos = ( req,res, next ) => {
     next();
 }
 
+// colocar siempre en llavez
 module.exports = {
     validarCampos
 }
